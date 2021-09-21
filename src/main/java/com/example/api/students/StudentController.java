@@ -30,4 +30,9 @@ public class StudentController {
         studentService.delete(studentId);
     }
 
+    @PutMapping(path = "item")
+    public void update(@RequestBody Student student) {
+        studentService.update(student);
+    }
+
 }

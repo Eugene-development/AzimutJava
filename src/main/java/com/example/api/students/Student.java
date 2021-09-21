@@ -8,6 +8,7 @@ import java.time.Period;
 @Entity
 public class Student {
 
+    public static Student item;
     @Id
     @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
@@ -38,7 +39,15 @@ public class Student {
         return dob;
     }
 
-//    Агрегированное поле
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
+
+    //    Агрегированное поле
     public int getAge() {
         return Period.between(dob, LocalDate.now()).getYears();
     }
