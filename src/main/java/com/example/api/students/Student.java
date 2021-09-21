@@ -2,6 +2,7 @@ package com.example.api.students;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 
 @Entity
@@ -35,5 +36,10 @@ public class Student {
 
     public LocalDate getDob() {
         return dob;
+    }
+
+//    Агрегированное поле
+    public int getAge() {
+        return Period.between(dob, LocalDate.now()).getYears();
     }
 }
