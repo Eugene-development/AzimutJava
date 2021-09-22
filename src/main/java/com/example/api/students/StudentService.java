@@ -1,5 +1,6 @@
 package com.example.api.students;
 
+import com.example.api.responce.RestApiException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,14 +15,15 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-
     public List<Student> list() {
         return studentRepository.findAll();
     }
 
     public void add(Student student) {
+        if (studentRepository.findStudentByEmail(student.getEmail()).isPresent()) {
+            throw new RestApiException("Email is busy");
+        }
         studentRepository.save(student);
-        System.out.println(student);
     }
 
     public void delete(Long studentId) {
@@ -31,12 +33,12 @@ public class StudentService {
 
     public void update(Student student) {
         Optional<Student> row = studentRepository.findById(student.getId());
-        if (row.isPresent()){
+        if (row.isPresent()) {
             Student item = row.get();
-            if (!student.getName().isEmpty()){
+            if (!student.getName().isEmpty()) {
                 item.setName(student.getName());
             }
-            if (student.getDob() != null){
+            if (student.getDob() != null) {
                 item.setDob(student.getDob());
             }
             studentRepository.save(item);

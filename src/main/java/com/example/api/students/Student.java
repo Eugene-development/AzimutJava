@@ -9,21 +9,26 @@ import java.time.Period;
 public class Student {
 
     public static Student item;
+
     @Id
     @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
     private Long id;
 
     private String name;
-    private LocalDate dob;
 
+    @Column(unique = true)
+    private String email;
+
+    private LocalDate dob;
 
 
     public Student() {
     }
 
-    public Student(String name, LocalDate dob) {
+    public Student(String name, String email, LocalDate dob) {
         this.name = name;
+        this.email = email;
         this.dob = dob;
     }
 
@@ -47,8 +52,22 @@ public class Student {
         this.dob = dob;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     //    Агрегированное поле
     public int getAge() {
         return Period.between(dob, LocalDate.now()).getYears();
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", dob=" + dob +
+                '}';
     }
 }
