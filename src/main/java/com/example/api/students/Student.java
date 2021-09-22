@@ -56,6 +56,10 @@ public class Student {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     //    Агрегированное поле
     public int getAge() {
         return Period.between(dob, LocalDate.now()).getYears();
@@ -70,4 +74,5 @@ public class Student {
                 ", dob=" + dob +
                 '}';
     }
+
 }

@@ -38,6 +38,9 @@ public class StudentService {
             if (!student.getName().isEmpty()) {
                 item.setName(student.getName());
             }
+            if (!student.getEmail().isEmpty()) {
+                item.setEmail(student.getEmail());
+            }
             if (student.getDob() != null) {
                 item.setDob(student.getDob());
             }
